@@ -118,7 +118,8 @@ class Arlima_ImageVersionManager
                 // Try to create new version
 
                 $new_version_file_relative_path = $this->generateVersionName($file, $max_width);
-                $file_full_path = self::uploadDirData('basedir').'/'.$file;
+                //$file_full_path = self::uploadDirData('basedir').'/'.$file;
+                $file_full_path = get_attached_file($this->attach_id);
                 $editor = wp_get_image_editor($file_full_path);
 
                 if( is_wp_error($editor) ) {

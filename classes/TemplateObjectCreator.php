@@ -366,7 +366,7 @@ class Arlima_TemplateObjectCreator
             );
         }
 
-        return empty($filtered['content']) ? '':Arlima_Utils::linkWrap($article, $filtered['content']);
+        return $filtered['content'];
     }
 
 
