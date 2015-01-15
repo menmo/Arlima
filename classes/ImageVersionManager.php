@@ -109,7 +109,7 @@ class Arlima_ImageVersionManager
             $meta = wp_get_attachment_metadata($this->attach_id);
 
             // Version already generated
-            if( !empty($meta[self::META_KEY_VERSIONS]) && isset($meta[self::META_KEY_VERSIONS][$max_width]) ) {
+            if( !empty($meta[self::META_KEY_VERSIONS]) && isset($meta[self::META_KEY_VERSIONS][$max_width]) && file_exists(self::uploadDirData('basedir').'/'.$meta[self::META_KEY_VERSIONS][$max_width])) {
                 $new_version_file = $meta[self::META_KEY_VERSIONS][$max_width];
                 $version_created_date = isset($meta[self::META_KEY_VERSION_CREATED]) ? $meta[self::META_KEY_VERSION_CREATED]:'';
             }
