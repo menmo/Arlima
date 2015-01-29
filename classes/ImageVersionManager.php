@@ -50,7 +50,7 @@ class Arlima_ImageVersionManager
             if( self::$upload_dir_data === false || false !== self::$upload_dir_data['error']) {
                 self::$upload_dir_data = array(
                     'basedir' => WP_CONTENT_DIR .'/uploads',
-                    'baseurl' => home_url() .'/wp-content/uploads'
+                    'baseurl' => WP_CONTENT_URL .'/uploads'
                 );
             }
         }
