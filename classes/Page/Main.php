@@ -30,9 +30,9 @@ class Arlima_Page_Main extends Arlima_AbstractAdminPage {
         if( Arlima_Plugin::supportsImageEditor() ) {
             // these files could not be enqueue´d until wp version 3.5
             $wp_inc_url = includes_url() .'/js/jquery/ui/';
-            $scripts['jquery-ui-effects'] = $wp_inc_url .'jquery.ui.effect.min.js';
-            $scripts['jquery-ui-effects-shake'] = $wp_inc_url .'jquery.ui.effect-shake.min.js';
-            $scripts['jquery-ui-effects-highlight'] = $wp_inc_url .'jquery.ui.effect-highlight.min.js';
+            $scripts['jquery-ui-effects'] = $wp_inc_url .'effect.min.js';
+            $scripts['jquery-ui-effects-shake'] = $wp_inc_url .'effect-shake.min.js';
+            $scripts['jquery-ui-effects-highlight'] = $wp_inc_url .'effect-highlight.min.js';
         }
 
         $scripts_to_enqueue = array();
