@@ -549,6 +549,9 @@ var ArlimaArticlePreview = (function($, window, Mustache, ArlimaUtils, ArlimaJS)
         if( article.opt('format') ) {
             classes.push(article.opt('format'));
         }
+        if( article.getChildArticles().length > 0) {
+            classes.push('has-children');
+        }
         return classes.join(' ');
     },
     _getStreamerHTML = function(article) {
