@@ -530,7 +530,7 @@ var ArlimaArticlePreview = (function($, window, Mustache, ArlimaUtils, ArlimaJS)
             if(  preTitle )
                 title = '<span class="arlima-pre-title">' + preTitle + '</span> ' + title;
 
-            return '<'+_this.titleElem+' style="font-size:'+article.data.size+'px">'+title+'</'+_this.titleElem+'>';
+            return '<'+_this.titleElem+' class="fsize-'+article.data.size+'">'+title+'</'+_this.titleElem+'>';
         }
         return '';
     },
