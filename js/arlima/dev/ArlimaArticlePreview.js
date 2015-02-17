@@ -321,6 +321,10 @@ var ArlimaArticlePreview = (function($, window, Mustache, ArlimaUtils, ArlimaJS)
             }
 
             $content.find('img').bind('load', _updateIframeHeight);
+            $content.find('a').click(function(e) {
+                e.preventDefault();
+                return false;
+            });
             $content.appendTo(_this.$iframeBody);
 
             //create as many iframes as needed
