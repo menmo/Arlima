@@ -9,24 +9,28 @@
     margin:10px auto 0;
     cursor: default;
     overflow: auto;
+    font-family: Helvetica, sans-serif;
+    font-weight: normal;
+    font-size: 15px;
 }
 
-    .tmpl-article.first-in-list,
-    .tmpl-article.has-streamer,
-    body.arlima-preview .tmpl-article {
-        border-top: 0;
-        margin-top: 0;
-    }
+.tmpl-article.first-in-list,
+.tmpl-article.has-streamer,
+body.arlima-preview .tmpl-article {
+    border-top: 0;
+    margin-top: 0;
+}
 
-    body.arlima-preview .tmpl-article {
-        padding-top: 0;
-        margin-bottom: 0;
-    }
+body.arlima-preview .tmpl-article {
+    padding-top: 0;
+    margin-bottom: 0;
+}
 
 .tmpl-article article {
     margin: 0;
     padding: 0;
     border:0;
+    overflow: auto;
 }
 
 .tmpl-article.img-full {
@@ -47,17 +51,21 @@
 
 
 /* links */
-.tmpl-article a {
+.tmpl-article a:link,
+.tmpl-article a:visited,
+.tmpl-article a:hover,
+.tmpl-article a:active {
     text-decoration: none;
     color:#333;
     cursor: pointer;
+    border-bottom: 0;
 }
 
 .tmpl-article h4,
 .tmpl-article h3,
 .tmpl-article h2,
 .tmpl-article h1 {
-    font-family: Verdana, Arial, sans-serif;
+    font-family: Tahoma, Helvetica, sans-serif;
     padding: 0 0 8px;
     margin: 0;
     line-height: 110%;
@@ -186,11 +194,12 @@ a.teaser-entryword:hover {
 
 .teaser-children {
     overflow: auto;
+    padding-top: 10px;
 }
 
 .teaser-children .tmpl-article,
 body.arlima-preview .teaser-children .tmpl-article {
-    padding: 10px 0 0;
+    padding: 0;
     border: 0;
     overflow: visible;
     margin-bottom: 18px;
@@ -203,15 +212,29 @@ body.arlima-preview .teaser-children .tmpl-article {
     overflow: auto;
 }
 
-.teaser-children .tmpl-article.teaser-split.first,
-.teaser-children .tmpl-article.teaser-split.last {
+.teaser-children .child-wrapper {
+    overflow: hidden;
+}
+
+.teaser-children .tmpl-article.teaser-split,
+body.arlima-preview .teaser-children .tmpl-article.teaser-split {
     float: left;
     width: 48% !important;
     clear: none;
+    margin-right: 1%;
+}
+
+.teaser-children .child-wrapper-3 .tmpl-article.teaser-split {
+    width: 32% !important;
+}
+
+.teaser-children .child-wrapper-4 .tmpl-article.teaser-split {
+    width: 24% !important;
 }
 
 .teaser-children .tmpl-article.teaser-split.last {
     float: right;
+    margin-right: 0;
 }
 
 .teaser-children .tmpl-article:last-child {
@@ -346,7 +369,7 @@ current list in wp-admin
 
 
 /* * * * * * * * * * * * * * * * *
- When displaying futute posts in
+ When displaying future posts in
  list preview
 * * * * * * * * * * * * * * * * */
 .arlima.future-post {
@@ -358,38 +381,52 @@ current list in wp-admin
 
 
 
-/* * * * * * * * * * * *
- - Fixes for theme 2012 2011
- This is only needed when using page-arlima.php that's no
- longer shipped with the plugin.
- @todo: Remove when moving to version 3.0
-* * * * * * * * * * * */
+/* * * * * * * * * *
+ Smaller screens
+* * * * * * * * * * */
+@media screen and (max-width: 590px) {
 
-.arlima-content #content {
-    margin: 0 34% 0 7.6%;
-    width: 58.4%;
-    position: static;
-}
+    .tmpl-article {
+        font-size: 13px;
+    }
 
-#primary.arlima-content {
-    margin:0 -26.4% 0 0;
-}
+    .tmpl-article h1,
+    .tmpl-article h2,
+    .tmpl-article h3,
+    .tmpl-article h4,
+    .tmpl-article h5 {
+        font-size: 24px !important;
+        line-height: normal !important;
+        padding-bottom: 5px !important;
+    }
 
-#page.site .arlima-content #content {
-    margin:0;
-    width: 70%;
-    float: left;
-}
+    .tmpl-article.format-serif h4,
+    .tmpl-article.format-serif h3,
+    .tmpl-article.format-serif h2,
+    .tmpl-article.format-serif h1 {
+        font-size: 20px !important;
+    }
 
-#page.site #primary.arlima-content {
-    margin: 0;
-}
+    /* Make all childs display block */
+    .teaser-children .tmpl-article.teaser-split,
+    body.arlima-preview .teaser-children .tmpl-article.teaser-split
+    {
+        float: none !important;
+        width: 100% !important;
+    }
 
-@media screen and (max-width: 580px) {
-    #page.site .arlima-content #content {
-        margin:0;
+    /* Alla images full width */
+
+    .tmpl-article img.alignleft,
+    .tmpl-article img.alignright,
+    .tmpl-article img.half,
+    .tmpl-article img.third,
+    .tmpl-article img.fourth,
+    .tmpl-article img.fifth,
+    .tmpl-article img.sixth {
+        margin: 0 0 5px;
         width: auto;
-        float: none;
+        max-width: 100%;
     }
 }
 
