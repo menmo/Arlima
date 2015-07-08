@@ -84,11 +84,12 @@ class Arlima_WP_Facade implements Arlima_CMSInterface
      */
     function resolveFilePath($path, $relative=false)
     {
-        $paths = explode(basename(WP_CONTENT_DIR), $path);
+        $content_dir = basename(WP_CONTENT_DIR);
+        $paths = explode($content_dir, $path, 2);
         if( count($paths) > 1 ) {
             $new_path = $paths[1];
             if( file_exists(WP_CONTENT_DIR .'/'. $paths[1]) )
-                return $relative ? 'wp-content'.$new_path : WP_CONTENT_DIR .'/'. $new_path;
+                return $relative ? $content_dir . $new_path : WP_CONTENT_DIR .'/'. $new_path;
         }
         return false;
     }
