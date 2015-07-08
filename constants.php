@@ -47,7 +47,7 @@ defined('ARLIMA_TIME_ADJUST')
 // different installations. For what reason is still unknown. Any how, if the publish date
 // of your arlima articles gets incorrect you can try to change the value of this
 // contant to 'post_date_gmt'
-define('ARLIMA_POST_DATE_PROP', 'post_date');
+define('ARLIMA_POST_DATE_PROP', 'post_date_gmt');
 
 // The facade class in front of underlying system
 define('ARLIMA_CMS_FACADE', 'Arlima_WP_Facade');
