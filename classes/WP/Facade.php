@@ -551,6 +551,8 @@ class Arlima_WP_Facade implements Arlima_CMSInterface
         $post = is_numeric($post) ? get_post($post) : $post;
 
         $text = !empty($post->post_excerpt) ? $post->post_excerpt : $this->getExcerpt($post->ID);
+        $text = $this->applyFilters('get_the_excerpt', $text);
+
         if ( stristr($text, '<p>') === false ) {
             $text = '<p>' . $text . '</p>';
         }
