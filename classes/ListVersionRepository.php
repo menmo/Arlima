@@ -672,7 +672,7 @@ class Arlima_ListVersionRepository extends Arlima_AbstractRepositoryDB {
 
         if(!$include_future_articles) {
             foreach($articles as $i => $art) {
-                if( !empty($article_data['published']) && $article_data['published'] > $now) {
+                if( !$art->isPublished()) {
                     $num_future_articles++;
                     unset($articles[$i]);
                 }
