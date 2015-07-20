@@ -654,28 +654,27 @@ class Arlima_ListVersionRepository extends Arlima_AbstractRepositoryDB {
             $article_data = self::legacyFix($this->removePrefix($row, 'ala_'));
             $parent_index = (int)$row->ala_parent;
 
-            if( !$include_future_articles && !empty($article_data['published']) && $article_data['published'] > $now) {
-                // Future post, go on
-                if( $parent_index == -1 )
-                    $removed_future_parent_articles[] = count($articles);
-
-                $num_future_articles++;
-                continue;
-            }
-
             if( $parent_index == -1 ) {
                 $articles[] = new Arlima_Article($article_data);
             } else {
-
-                if( !$include_future_articles )
-                    $parent_index -= count($removed_future_parent_articles);
 
                 if( empty($articles[$parent_index]) ) {
                     $log = 'PHP Warning: found child that is referring to a parent article that does not exist, child '.
                         $article_data['id'].' '.$article_data['title'].' parent '.$row->ala_parent. ' URL: '.$_SERVER['REQUEST_URI'];
                     error_log($log);
                 } else {
-                    $articles[ $parent_index ]->addChild( $article_data ); // only add the data array, not an article object
+                    if( empty($article_data['published']) || $article_data['published'] <= $now) {
+                        $articles[ $parent_index ]->addChild( $article_data ); // only add the data array, not an article object
+                    }
+                }
+            }
+        }
+
+        if(!$include_future_articles) {
+            foreach($articles as $i => $art) {
+                if( !empty($article_data['published']) && $article_data['published'] > $now) {
+                    $num_future_articles++;
+                    unset($articles[$i]);
                 }
             }
         }

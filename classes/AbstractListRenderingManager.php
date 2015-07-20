@@ -62,8 +62,8 @@ abstract class Arlima_AbstractListRenderingManager
                 foreach($this->list->getArticles() as $art) {
                     if( is_array($art) ) {
                         $art = new Arlima_Article($art);
-                        $e = new Exception('');
-                        error_log('Arlima article now array...'.PHP_EOL.$e->getTraceAsString());
+                        //$e = new Exception('');
+                        //error_log('Arlima article now array...'.PHP_EOL.$e->getTraceAsString());
                         // @todo: Remove this before stable release
                     }
                     if( !$art->isSectionDivider() ) {
@@ -149,7 +149,6 @@ abstract class Arlima_AbstractListRenderingManager
                 return array($index, ''); // don't show this scheduled article right now
             }
         }
-
         return array($index+1, $this->generateArticleHtml($article, $index, $this->setup($article)));
     }
 
