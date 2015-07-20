@@ -233,8 +233,8 @@ class Arlima_ListVersionRepository extends Arlima_AbstractRepositoryDB {
         if( !$do_use_cache || !is_array($articles = $this->cache->get($this->last_cache_key.$list->getId()))) {
             list($articles, $num_future_articles) = $this->queryListArticles($list->getVersionAttribute('id'), $include_future_articles);
             if( $do_use_cache ) {
-                $ttl = $num_future_articles ? 60 : 0; // Can not be cached for ever if containing future posts
-                $this->cache->set($this->last_cache_key.$list->getId(), $articles, $ttl);
+                //$ttl = $num_future_articles ? 60 : 0; // Can not be cached for ever if containing future posts
+                $this->cache->set($this->last_cache_key.$list->getId(), $articles, 60);
             }
         }
 
@@ -679,7 +679,7 @@ class Arlima_ListVersionRepository extends Arlima_AbstractRepositoryDB {
             }
         }
 
-        return array($articles, $num_future_articles);
+        return array(array_values($articles), $num_future_articles);
     }
 
     /**
