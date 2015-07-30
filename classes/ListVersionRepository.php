@@ -663,7 +663,7 @@ class Arlima_ListVersionRepository extends Arlima_AbstractRepositoryDB {
                         $article_data['id'].' '.$article_data['title'].' parent '.$row->ala_parent. ' URL: '.$_SERVER['REQUEST_URI'];
                     error_log($log);
                 } else {
-                    if( empty($article_data['published']) || $article_data['published'] <= $now) {
+                    if($include_future_articles || empty($article_data['published']) || $article_data['published'] <= $now) {
                         $articles[ $parent_index ]->addChild( $article_data ); // only add the data array, not an article object
                     }
                 }
