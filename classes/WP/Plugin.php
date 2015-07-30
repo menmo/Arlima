@@ -856,9 +856,9 @@ class Arlima_WP_Plugin
             $this->addAdminJavascriptVars('arlima_js_admin');
         }
 
-        if ( function_exists('poll_footer_admin') ) {
+        /*if ( function_exists('poll_footer_admin') ) {
             add_action('admin_footer', 'poll_footer_admin');
-        }
+        }*/
     }
 
     /**
