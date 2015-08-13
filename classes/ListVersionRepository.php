@@ -813,7 +813,7 @@ class Arlima_ListVersionRepository extends Arlima_AbstractRepositoryDB {
             strpos($article['options']['fileInclude'], WP_CONTENT_DIR) !== false &&
             substr($article['options']['fileInclude'], 0, 1) == '/' ) {
             $root = basename(WP_CONTENT_DIR);
-            $article['options']['fileInclude'] = $root .'/'. str_replace(WP_CONTENT_DIR, '', $article['options']['fileInclude']);
+            $article['options']['fileInclude'] = $root .'/'. trim(str_replace(WP_CONTENT_DIR, '', $article['options']['fileInclude']), '/');
         }
 
     }

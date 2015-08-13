@@ -443,8 +443,8 @@ $cms = Arlima_CMSFacade::load();
                             foreach( $includes as $label => $file ):
                                 if( is_numeric($label) )
                                     $label = basename($file);
-                                /*if( $relative_path = $cms->resolveFilePath($file, true) )
-                                    $file = $relative_path;*/
+                                if( $relative_path = $cms->resolveFilePath($file, true) )
+                                    $file = $relative_path;
 
                                 ?>
                                 <tr>

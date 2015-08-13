@@ -161,6 +161,10 @@ var ArlimaArticle = (function($, window, ArlimaJS, ArlimaUtils) {
         // We're done with the title text at this poins
         titleHTML = titleText;
 
+        if( !$.isArray(this.data.image) ) {
+            titleHTML = '<span class="fa fa-picture-o"></span>' + titleHTML;
+        }
+
         /*
           Is this a section divider
          */
