@@ -43,7 +43,7 @@ function arlimaNestedSortable(list) {
     },
     _nextIsChild = function(ui) {
         if (!next.length) _updateSharedVars(ui);
-        return next.length && next[0].arlimaArticle.isChild();
+        return next.length && next[0].arlimaArticle && next[0].arlimaArticle.isChild();
     },
     _itemDepth = function($item) {
         var margin = $item.eq(0).css('margin-left');
@@ -97,7 +97,7 @@ function arlimaNestedSortable(list) {
         // in the DOM-tree and thus affects the result of isParent(), it will always return false...
 
         var article = ui.item[0].arlimaArticle || ui.item.context.arlimaArticle,
-            canDropArticle = !_nextIsChild(ui) || (article.canBeChild() && !isMovingWithChildren),
+            canDropArticle = !_nextIsChild(ui) || (article && article.canBeChild() && !isMovingWithChildren),
             hasDraggedToOtherList = window.arlimaDragFromList && window.arlimaDragFromList != window.arlimaDragToList;
 
         if( canDropArticle ) {
@@ -505,6 +505,7 @@ function arlimaNestedSortable(list) {
             },
             receive: function(event, ui) {
                 if( window.cancelArlimaArticleDrop ) {
+                    $(this).sortable('cancel');
                     return;
                 }
 
