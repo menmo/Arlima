@@ -98,8 +98,9 @@
 | public | <strong>getCreationTime()</strong> : <em>int</em><br /><em>Get an unix timestamp (in seconds) of when the article was created</em> |
 | public | <strong>getId()</strong> : <em>int</em> |
 | public | <strong>getImageAlignment()</strong> : <em>string</em><br /><em>Get aligment of possibly connected image</em> |
+| public | <strong>getImageFilePath()</strong> : <em>string</em><br /><em>Returns path to image file if known (Remember that the article object may refer to an article on a remote website)</em> |
 | public | <strong>getImageId()</strong> : <em>int/string</em><br /><em>Get id of possibly connected image. Will return empty string if no images is attached to the article</em> |
-| public | <strong>getImageSize()</strong> : <em>string</em><br /><em>Get size name of possibly connected image</em> |
+| public | <strong>getImageSize()</strong> : <em>string</em><br /><em>Get size name of possibly connected image (full, half, third, quarter, fifth, sixth)</em> |
 | public | <strong>getImageURL()</strong> : <em>string</em><br /><em>Get the URL of article image. Returns empty string if not image is connected to the article</em> |
 | public | <strong>getParentIndex()</strong> : <em>int</em><br /><em>Will return -1 if the article does'nt have a parent article</em> |
 | public | <strong>getPostId()</strong> : <em>int</em><br /><em>Get id of possibly connected post</em> |
@@ -390,7 +391,7 @@ isInScheduledInterval('*:*'); // All days of the week and all hours of the day
 | public | <strong>loadLatestPreview(</strong><em>int</em> <strong>$id</strong>)</strong> : <em>[\Arlima_List](#class-arlima_list)</em><br /><em>Load latest preview version of article list with given id.</em> |
 | public | <strong>loadList(</strong><em>int/string</em> <strong>$id</strong>, <em>bool/mixed</em> <strong>$version=false</strong>, <em>bool</em> <strong>$include_future_posts=false</strong>)</strong> : <em>[\Arlima_List](#class-arlima_list)</em><br /><em>Future posts will always be included in the list if you're loading a specific version of the list. Otherwise you can use the argument $include_future_posts to control if the list should contain future posts as well. Setting $include_future_posts to true will how ever disable the caching of the article data</em> |
 | public | <strong>loadListSlugs()</strong> : <em>array</em><br /><em>will return an array looking like array( stdClass(id => ... title => ... slug => ...) )</em> |
-| public | <strong>loadListsByArticleId(</strong><em>mixed</em> <strong>$post_id</strong>)</strong> : <em>array</em><br /><em>Loads an array with objects containing list id and options that have teasers that are linked to the post with $post_id</em> |
+| public | <strong>loadListsByArticleId(</strong><em>int</em> <strong>$post_id</strong>)</strong> : <em>array</em><br /><em>Loads an array with objects containing list id and options that have teasers that are linked to the post with $post_id</em> |
 | public static | <strong>postToArlimaArticle(</strong><em>mixed</em> <strong>$post</strong>, <em>mixed/string/null</em> <strong>$text=null</strong>, <em>array</em> <strong>$override=array()</strong>)</strong> : <em>array</em><br /><em>Takes a post and returns an Arlima article object</em> |
 | public | <strong>saveNewListVersion(</strong><em>[\Arlima_List](#class-arlima_list)</em> <strong>$list</strong>, <em>mixed</em> <strong>$articles</strong>, <em>mixed</em> <strong>$user_id</strong>, <em>int</em> <strong>$schedule_time</strong>, <em>bool</em> <strong>$preview=false</strong>)</strong> : <em>int</em> |
 | public | <strong>uninstall()</strong> : <em>void</em><br /><em>Removes the database tables created when plugin was installed</em> |
@@ -444,7 +445,7 @@ isInScheduledInterval('*:*'); // All days of the week and all hours of the day
 | public | <strong>addPreviewArticles(</strong><em>[\Arlima_List](#class-arlima_list)</em> <strong>$list</strong>)</strong> : <em>void</em><br /><em>Add articles and version of latest preview version to given list object</em> |
 | public | <strong>addVersionHistory(</strong><em>[\Arlima_List](#class-arlima_list)</em> <strong>$list</strong>)</strong> : <em>array</em><br /><em>Add version history data to list and return an array with all published versions</em> |
 | public | <strong>clear(</strong><em>int</em> <strong>$version_id</strong>)</strong> : <em>void</em><br /><em>Removes all articles in a version.</em> |
-| public | <strong>create(</strong><em>[\Arlima_List](#class-arlima_list)</em> <strong>$list</strong>, <em>array</em> <strong>$articles</strong>, <em>int</em> <strong>$user_id</strong>, <em>bool</em> <strong>$preview=false</strong>)</strong> : <em>mixed</em> |
+| public | <strong>create(</strong><em>[\Arlima_List](#class-arlima_list)</em> <strong>$list</strong>, <em>array</em> <strong>$articles</strong>, <em>int</em> <strong>$user_id</strong>, <em>bool</em> <strong>$preview=false</strong>)</strong> : <em>int</em> |
 | public static | <strong>createArticle(</strong><em>array</em> <strong>$override=array()</strong>)</strong> : <em>[\Arlima_Article](#class-arlima_article)</em><br /><em>The article data is in fact created with javascript in front-end so you can't see this function as the sole creator of article objects. For that reason it might be good to take look at this function once in a while, making sure it generates a similar object as generated with javascript in front-end.</em> |
 | public | <strong>createDatabaseTables()</strong> : <em>void</em> |
 | public | <strong>createScheduledVersion(</strong><em>[\Arlima_List](#class-arlima_list)</em> <strong>$list</strong>, <em>array</em> <strong>$articles</strong>, <em>int</em> <strong>$user_id</strong>, <em>int</em> <strong>$schedule_time</strong>)</strong> : <em>int</em> |
@@ -505,7 +506,6 @@ isInScheduledInterval('*:*'); // All days of the week and all hours of the day
      $renderer->setDisplayPostCallback(function($article_counter, $article, $post, $list) {
   return '...';
      });
-
      $renderer->renderList();
 ````
 
@@ -746,6 +746,7 @@ isInScheduledInterval('*:*'); // All days of the week and all hours of the day
 | public | <strong>getVersions(</strong><em>mixed/array/null</em> <strong>$meta=null</strong>, <em>bool</em> <strong>$as_url=false</strong>)</strong> : <em>array</em><br /><em>Get paths to all generated arlima version</em> |
 | public static | <strong>registerFilters()</strong> : <em>void</em><br /><em>Removes all generated versions when attachments gets deleted</em> |
 | public static | <strong>removeVersions(</strong><em>mixed/int</em> <strong>$attach_id=null</strong>)</strong> : <em>void</em><br /><em>Removes all image versions created for given attachment</em> |
+| public static | <strong>uploadDirData(</strong><em>mixed/string</em> <strong>$key=null</strong>)</strong> : <em>array</em> |
 
 <hr /> 
 ### Class: Arlima_WP_Page_Edit
@@ -819,6 +820,7 @@ isInScheduledInterval('*:*'); // All days of the week and all hours of the day
 | public | <strong>adminMenu()</strong> : <em>void</em><br /><em>Creates the menu in wp-admin for this plugin</em> |
 | public | <strong>arlimaListShortCode(</strong><em>array</em> <strong>$attr</strong>)</strong> : <em>string</em><br /><em>Short code for arlima</em> |
 | public | <strong>attachmentMetaBox()</strong> : <em>void</em><br /><em>Outputs HTML content of arlima versions meta box</em> |
+| public static | <strong>bodyClassFilter(</strong><em>array</em> <strong>$classes</strong>)</strong> : <em>void</em> |
 | public static | <strong>classLoader(</strong><em>string</em> <strong>$class</strong>)</strong> : <em>void</em><br /><em>Class loader that either tries to load the class from arlima class directory or template engine directory</em> |
 | public | <strong>commonInitHook()</strong> : <em>void</em><br /><em>Init hook taking place in both wp-admin and theme</em> |
 | public static | <strong>deactivate()</strong> : <em>void</em><br /><em>Deactivation procedure for this plugin - Removes feed from wp_rewrite</em> |
