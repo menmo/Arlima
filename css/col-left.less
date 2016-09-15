@@ -2,6 +2,42 @@
   width: auto;
 }
 
+.arlima {
+
+  #col-container {
+      display: flex;
+  }
+  #col-left {
+      flex: 7 1 65%;
+      order: 1;
+      width: auto;
+  }
+  #col-right {
+      flex: 2 1 35%;
+      order: 2;
+      width: auto;
+  }
+
+}
+
+@media only screen and (max-width: 768px) {
+
+  .arlima {
+    color: red;
+
+    #col-container {
+        display: block;
+    }
+    #col-left {
+        display: block;
+        float: none;
+    }
+    #col-right {
+        display: block;
+        float: none;
+    }
+  }
+}
 
 /*
 *  CONTAINER HEADER

@@ -1,64 +1,65 @@
 {
-    "name": "arlima-release-build-tools",
-    "description" : "This package definition lets you install the build tools necessary to create an Arlima release",
-    "version" : "1.0.0",
-    "devDependencies": {
-        "grunt": "~0.4.2",
-        "wrench": ">=0.1.0",
-        "grunt-contrib-concat": "~0.3.0",
-        "grunt-contrib-uglify": "~0.2.2",
-        "grunt-contrib-less": "~0.5.0"
+  "name": "arlima-release-build-tools",
+  "description": "This package definition lets you install the build tools necessary to create an Arlima release",
+  "version": "1.0.0",
+  "devDependencies": {
+    "grunt": "~1.0.1",
+    "grunt-contrib-concat": "~1.0.1",
+    "grunt-contrib-less": "~1.4.0",
+    "grunt-contrib-uglify": "~2.0.0",
+    "less-plugin-autoprefix": "^1.5.1",
+    "wrench": ">=0.1.0"
+  },
+  "gruntConfig": {
+    "mainScript": "arlima.php",
+    "excludeFromRelease": [
+      "node_modules",
+      "vendor",
+      "dist",
+      "composer.json",
+      "README.md",
+      "build",
+      "package.json",
+      "Gruntfile.js",
+      "composer.lock",
+      "category-arlima-example.php",
+      "test.php",
+      ".git"
+    ],
+    "lessFiles": {
+      "css/admin.css": "css/admin.less"
     },
-    "gruntConfig" : {
-        "mainScript" : "arlima.php",
-        "excludeFromRelease" : [
-            "node_modules",
-            "vendor",
-            "dist",
-            "composer.json",
-            "README.md",
-            "build",
-            "package.json",
-            "Gruntfile.js",
-            "composer.lock",
-            "category-arlima-example.php",
-            "test.php",
-            ".git"
-        ],
-        "lessFiles" : {
-            "css/admin.css" : "css/admin.less"
-        },
-        "filesToConcat" : {
-            "js/arlima/arlima.js" : [
-                "js/arlima/dev/ArlimaUtils.js",
-                "js/arlima/dev/ArlimaBackend.js",
-                "js/arlima/dev/ArlimaFormBuilder.js",
-                "js/arlima/dev/ArlimaArticleSettingsMenu.js",
-                "js/arlima/dev/ArlimaList.js",
-                "js/arlima/dev/ArlimaArticle.js",
-                "js/arlima/dev/ArlimaArticlePreview.js",
-                "js/arlima/dev/ArlimaArticleForm.js",
-                "js/arlima/dev/ArlimaArticleConnection.js",
-                "js/arlima/dev/ArlimaPostSearch.js",
-                "js/arlima/dev/ArlimaListLoader.js",
-                "js/arlima/dev/ArlimaFormBlocker.js",
-                "js/arlima/dev/ArlimaTemplateLoader.js",
-                "js/arlima/dev/ArlimaVersionManager.js",
-                "js/arlima/dev/ArlimaListContainer.js",
-                "js/arlima/dev/ArlimaKeyBoardShortCuts.js",
-                "js/arlima/dev/ArlimaListPreview.js",
-                "js/arlima/dev/ArlimaNestedSortable.js",
-                "js/arlima/dev/ArlimaImageManager.js",
-                "js/arlima/dev/ArlimaImageUploader.js",
-                "js/arlima/dev/ArlimaFileIncludes.js",
-                "js/arlima/dev/ArlimaScissors.js",
-                "js/arlima/dev/ArlimaArticlePreset.js",
-                "js/arlima/dev/ArlimaScheduledIntervalPicker.js",
-                "js/arlima/dev/ArlimaTinyMCE.js"
-            ]
-        },
-        "uglifyjs" : {
-            "js/arlima/arlima.js" : "js/arlima/arlima.js"
-        }
+    "filesToConcat": {
+      "js/arlima/arlima.js": [
+        "js/arlima/dev/ArlimaUtils.js",
+        "js/arlima/dev/ArlimaBackend.js",
+        "js/arlima/dev/ArlimaFormBuilder.js",
+        "js/arlima/dev/ArlimaArticleSettingsMenu.js",
+        "js/arlima/dev/ArlimaList.js",
+        "js/arlima/dev/ArlimaArticle.js",
+        "js/arlima/dev/ArlimaArticlePreview.js",
+        "js/arlima/dev/ArlimaArticleForm.js",
+        "js/arlima/dev/ArlimaArticleConnection.js",
+        "js/arlima/dev/ArlimaPostSearch.js",
+        "js/arlima/dev/ArlimaListLoader.js",
+        "js/arlima/dev/ArlimaFormBlocker.js",
+        "js/arlima/dev/ArlimaTemplateLoader.js",
+        "js/arlima/dev/ArlimaVersionManager.js",
+        "js/arlima/dev/ArlimaListContainer.js",
+        "js/arlima/dev/ArlimaKeyBoardShortCuts.js",
+        "js/arlima/dev/ArlimaListPreview.js",
+        "js/arlima/dev/ArlimaNestedSortable.js",
+        "js/arlima/dev/ArlimaImageManager.js",
+        "js/arlima/dev/ArlimaImageUploader.js",
+        "js/arlima/dev/ArlimaFileIncludes.js",
+        "js/arlima/dev/ArlimaScissors.js",
+        "js/arlima/dev/ArlimaArticlePreset.js",
+        "js/arlima/dev/ArlimaScheduledIntervalPicker.js",
+        "js/arlima/dev/ArlimaTinyMCE.js"
+      ]
+    },
+    "uglifyjs": {
+      "js/arlima/arlima.js": "js/arlima/arlima.js"
     }
+  }
 }

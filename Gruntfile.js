@@ -83,7 +83,8 @@ module.exports = function(grunt) {
                     yuicompress: true,
                     optimization: 2
                 },
-                files: config.lessFiles
+                files: config.lessFiles,
+                plugins: [new (require('less-plugin-autoprefix'))({browsers: ["last 6 versions"]})],
             }
         }
     });
