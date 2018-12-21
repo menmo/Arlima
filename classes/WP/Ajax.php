@@ -351,7 +351,7 @@ class Arlima_WP_Ajax
         global $current_user;
         get_currentuserinfo();
 
-        $setup = get_user_meta($current_user->ID, 'arlima-list-setup', true);
+        $setup = get_user_meta($current_user->ID, get_current_blog_id() . 'arlima-list-setup', true);
         if ( !$setup ) {
             $setup = array();
         }
@@ -371,9 +371,9 @@ class Arlima_WP_Ajax
         $lists = isset($_POST['lists']) ? $_POST['lists'] : null;
 
         if ( $lists ) {
-            update_user_meta($current_user->ID, 'arlima-list-setup', $lists);
+            update_user_meta($current_user->ID, get_current_blog_id() . 'arlima-list-setup', $lists);
         } else {
-            delete_user_meta($current_user->ID, 'arlima-list-setup');
+            delete_user_meta($current_user->ID, get_current_blog_id() . 'arlima-list-setup');
         }
 
         die(json_encode(array()));
